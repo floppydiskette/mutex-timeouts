@@ -1,0 +1,18 @@
+[package]
+name = "mutex-timeouts"
+version = "0.1.0"
+edition = "2021"
+authors = ["husky (floppydiskette)"]
+description = "a simple crate to let you specify a timeout on a mutex lock"
+readme = "README.md"
+license = "Apache-2.0"
+license-file = "LICENSE"
+keywords = ["mutex", "timeout", "lock"]
+categories = ["concurrency"]
+repository = "https://github.com/floppydiskette/mutex-timeouts"
+homepage = "https://github.com/floppydiskette/mutex-timeouts"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "*", optional = true, features = ["sync"] }
