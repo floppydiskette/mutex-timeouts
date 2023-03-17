@@ -1,5 +1,3 @@
-use ::std::sync::Mutex;
-
 pub mod std;
 #[cfg(feature = "tokio")]
 pub mod tokio;
