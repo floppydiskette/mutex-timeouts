@@ -11,8 +11,16 @@ pub struct MutexWithTimeout<T> {
 }
 
 impl<T> MutexWithTimeout<T> {
+    /// Creates a new `MutexWithTimeout` with a default timeout of 5 seconds.
+    pub fn new(inner: T) -> Self {
+        Self {
+            inner: Mutex::new(inner),
+            timeout: Duration::from_secs(5),
+        }
+    }
+
     /// Creates a new `MutexWithTimeout` with the given timeout.
-    pub async fn new(inner: T, timeout: Duration) -> Self {
+    pub async fn new_with_timeout(inner: T, timeout: Duration) -> Self {
         Self {
             inner: Mutex::new(inner),
             timeout,
