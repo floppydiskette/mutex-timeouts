@@ -2,7 +2,6 @@
 
 use std::time::Duration;
 use tokio::sync::{Mutex, MutexGuard};
-use crate::timeout_handler;
 
 /// A wrapper around `tokio::sync::Mutex` that allows for a timeout to be set.
 pub struct MutexWithTimeout<T> {
