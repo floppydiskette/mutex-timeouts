@@ -1,7 +1,12 @@
 #![cfg(feature = "tokio")]
 
+use std::sync::Arc;
+use std::sync::atomic::AtomicU64;
 use std::time::Duration;
+use once_cell::sync::Lazy;
 use tokio::sync::{Mutex, MutexGuard};
+
+pub static GLOBAL_TOKIO_TIMEOUT: Lazy<Arc<AtomicU64>> = Lazy::new(|| Arc::new(AtomicU64::new(5)));
 
 /// A wrapper around `tokio::sync::Mutex` that allows for a timeout to be set.
 pub struct MutexWithTimeout<T> {
@@ -10,11 +15,11 @@ pub struct MutexWithTimeout<T> {
 }
 
 impl<T> MutexWithTimeout<T> {
-    /// Creates a new `MutexWithTimeout` with a default timeout of 5 seconds.
+    /// Creates a new `MutexWithTimeout` with the default timeout.
     pub fn new(inner: T) -> Self {
         Self {
             inner: Mutex::new(inner),
-            timeout: Duration::from_secs(5),
+            timeout: Duration::from_secs(GLOBAL_TOKIO_TIMEOUT.load(std::sync::atomic::Ordering::Relaxed)),
         }
     }
 
