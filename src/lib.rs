@@ -9,7 +9,7 @@ mod tests {
 
     #[test]
     fn test_lock() {
-        let mutex = std::MutexWithTimeout::new((), Duration::from_secs(1));
+        let mutex = std::MutexWithTimeout::new_with_timeout((), Duration::from_secs(1));
         let _guard = mutex.lock().unwrap();
     }
 }
